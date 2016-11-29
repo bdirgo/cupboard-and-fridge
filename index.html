@@ -147,8 +147,9 @@ function initIngredients(array) {
 		});
 	} else {
 		$.each(JSON.parse(localStorage.getItem('cupboardIngredients')),function(index, value) {
-			$("div#ingredients").append("<span id="+index+" onclick='removeIngredient("+index+")' class='singleIngredient'> "+ value + " </span>");
-
+			if (value != "null") {
+				$("div#ingredients").append("<span id="+index+" onclick='removeIngredient("+index+")' class='singleIngredient'> "+ value + " </span>");
+			}
 		});
 	}
 	$("#removeThis").empty();

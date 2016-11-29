@@ -4,7 +4,7 @@ $(function() {
             App.attachListeners();
         },
         config: {
-            reader: "code_128",
+            reader: "ean",
             length: 10
         },
         attachListeners: function() {
@@ -116,7 +116,7 @@ $(function() {
             numOfWorkers: 1,
             decoder: {
                 readers: [{
-                    format: "code_128_reader",
+                    format: "ean_reader",
                     config: {}
                 }]
             },

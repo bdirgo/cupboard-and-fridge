@@ -2,151 +2,151 @@
 <html>
 <head>
 	<script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
-    <link rel="stylesheet" href="https://serratus.github.io/quaggaJS/stylesheets/styles.css">
-    <link rel="stylesheet" href="https://serratus.github.io/quaggaJS/stylesheets/example.css">
-    <link rel="stylesheet" href="https://serratus.github.io/quaggaJS/stylesheets/pygment_trac.css">
+	<link rel="stylesheet" href="https://serratus.github.io/quaggaJS/stylesheets/styles.css">
+	<link rel="stylesheet" href="https://serratus.github.io/quaggaJS/stylesheets/example.css">
+	<link rel="stylesheet" href="https://serratus.github.io/quaggaJS/stylesheets/pygment_trac.css">
 	<!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-  <meta charset="utf-8">
-  <title>Spoontacular Query</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta charset="utf-8">
-	<!-- <link rel="stylesheet" type="text/css" href="bootstrap.css"> -->
-	<style>
-	ul {
-		list-style-type:none;
-	}
-		
-	canvas {
-		max-width: 300px !important;
-	}
-/* ----------- iPhone 4 and 4S ----------- */
+    <meta charset="utf-8">
+    <title>Spoontacular Query</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <!-- <link rel="stylesheet" type="text/css" href="bootstrap.css"> -->
+    <style>
+    	ul {
+    		list-style-type:none;
+    	}
 
-/* Portrait and Landscape */
-@media only screen
-  and (min-device-width: 320px)
-  and (max-device-width: 480px)
-  and (-webkit-min-device-pixel-ratio: 2) {
-	canvas {
-		max-width: 200px;
-	}
+    	canvas {
+    		max-width: 300px !important;
+    	}
+    	/* ----------- iPhone 4 and 4S ----------- */
 
-	ul.thumbnails {
-		max-width: 180px;
-	}
-}
+    	/* Portrait and Landscape */
+    	@media only screen
+    	and (min-device-width: 320px)
+    	and (max-device-width: 480px)
+    	and (-webkit-min-device-pixel-ratio: 2) {
+    		canvas {
+    			max-width: 200px;
+    		}
 
-/* Portrait */
-@media only screen
-  and (min-device-width: 320px)
-  and (max-device-width: 480px)
-  and (-webkit-min-device-pixel-ratio: 2)
-  and (orientation: portrait) {
-}
+    		ul.thumbnails {
+    			max-width: 180px;
+    		}
+    	}
 
-/* Landscape */
-@media only screen
-  and (min-device-width: 320px)
-  and (max-device-width: 480px)
-  and (-webkit-min-device-pixel-ratio: 2)
-  and (orientation: landscape) {
+    	/* Portrait */
+    	@media only screen
+    	and (min-device-width: 320px)
+    	and (max-device-width: 480px)
+    	and (-webkit-min-device-pixel-ratio: 2)
+    	and (orientation: portrait) {
+    	}
 
-}
+    	/* Landscape */
+    	@media only screen
+    	and (min-device-width: 320px)
+    	and (max-device-width: 480px)
+    	and (-webkit-min-device-pixel-ratio: 2)
+    	and (orientation: landscape) {
 
-/* ----------- iPhone 5 and 5S ----------- */
+    	}
 
-/* Portrait and Landscape */
-@media only screen
-  and (min-device-width: 320px)
-  and (max-device-width: 568px)
-  and (-webkit-min-device-pixel-ratio: 2) {
-	canvas {
-		max-width: 250px;
-	}
+    	/* ----------- iPhone 5 and 5S ----------- */
 
-	ul.thumbnails {
-		max-width: 200px;
-	}
-}
+    	/* Portrait and Landscape */
+    	@media only screen
+    	and (min-device-width: 320px)
+    	and (max-device-width: 568px)
+    	and (-webkit-min-device-pixel-ratio: 2) {
+    		canvas {
+    			max-width: 250px;
+    		}
 
-/* Portrait */
-@media only screen
-  and (min-device-width: 320px)
-  and (max-device-width: 568px)
-  and (-webkit-min-device-pixel-ratio: 2)
-  and (orientation: portrait) {
-}
+    		ul.thumbnails {
+    			max-width: 200px;
+    		}
+    	}
 
-/* Landscape */
-@media only screen
-  and (min-device-width: 320px)
-  and (max-device-width: 568px)
-  and (-webkit-min-device-pixel-ratio: 2)
-  and (orientation: landscape) {
+    	/* Portrait */
+    	@media only screen
+    	and (min-device-width: 320px)
+    	and (max-device-width: 568px)
+    	and (-webkit-min-device-pixel-ratio: 2)
+    	and (orientation: portrait) {
+    	}
 
-}
+    	/* Landscape */
+    	@media only screen
+    	and (min-device-width: 320px)
+    	and (max-device-width: 568px)
+    	and (-webkit-min-device-pixel-ratio: 2)
+    	and (orientation: landscape) {
 
-	</style>
+    	}
+
+    </style>
 </head>
 <body>
-  <script>
+	<script>
 
-var returnedData = {},
-	formattedFood = {},
-	MASHAPE_KEY = "bjHmzyPtdhmshS94AOg2I1aPO3afp1BJuqJjsn9aYqzPQzTfJu";
+		var returnedData = {},
+		formattedFood = {},
+		MASHAPE_KEY = "bjHmzyPtdhmshS94AOg2I1aPO3afp1BJuqJjsn9aYqzPQzTfJu";
 
-handleReturnedRecipes = function(data) {
+		handleReturnedRecipes = function(data) {
     //Change data.source to data.something , where something is whichever part of the object you want returned.
     //To see the whole object you can output it to your browser console using:
     console.log(data);
-	$("#output").empty();
+    $("#output").empty();
     for (var i = data.length - 1; i >= 0; i--) {
     	$('#output').append("<div id="+data[i].id+"><img src="+data[i].image+" style='max-height:180px;'><h3>"+data[i].title+"</h3>"+"<h4>"+data[i].likes+"</h4><button id="+data[i].id+" onClick='requestTitle("+data[i].id+")'>More Info</button><hr></div>");
-	}
+    }
 };
 
 handleReturnedCloseRecipes = function(data) {
     //Change data.source to data.something , where something is whichever part of the object you want returned.
     //To see the whole object you can output it to your browser console using:
-	var backgroundColor = '#'+(Math.random()*0xFFFFFF<<0).toString(16);
+    var backgroundColor = '#'+(Math.random()*0xFFFFFF<<0).toString(16);
     console.log(data);
     for (var i = data.length - 1; i >= 0; i--) {
     	$('#output').append("<h3 style=background-color:"+backgroundColor+">These Recipes are so close you can taste it!</h3><hr><div id="+data[i].id+"><img src="+data[i].image+" style='max-height:180px;'><h3>"+data[i].title+"</h3>"+"<h4>"+data[i].likes+"</h4><button id="+data[i].id+" onClick='requestTitle("+data[i].id+")'>More Info</button><hr></div>");
-	}
+    }
 };
 
 handleReturnedRecipeSteps = function (data) {
 	console.log(data);
 	var backgroundColor = '#'+(Math.random()*0xFFFFFF<<0).toString(16);
 	$("#selectedRecipe").empty();
-    for (var l =0; l < data.length; l++) {
-    	if (data[l].steps.length !== 0) {
-	    	for (var i = 0; i < data[l].steps.length; i++) {
-	        	$("#selectedRecipe").append("<div style='background-color:"+backgroundColor+"'><b>"+data[l].steps[i].number+"</b><p>"+data[l].steps[i].step+"</p>");
-	        	if (data[l].steps[i].ingredients.length !== 0) {
-		        	for (var j = 0; j < data[l].steps[i].ingredients.length; j++) {
-		        		$("#selectedRecipe").append("<img src="+data[l].steps[i].ingredients[j].image+">");
-		        	}
-		        }
-		        if (data[l].steps[i].equipment.length !== 0) {
-		        	for (var k = 0; k < data[l].steps[i].equipment.length; k++) {
-		        		$("#selectedRecipe").append("<img src="+data[l].steps[i].equipment[k].image+">");
-		        	}
-		        }
-		        $("#selectedRecipe").append("<hr>");
-	        }
-	    }
-        $("#selectedRecipe").append("</div>");
-    }
+	for (var l =0; l < data.length; l++) {
+		if (data[l].steps.length !== 0) {
+			for (var i = 0; i < data[l].steps.length; i++) {
+				$("#selectedRecipe").append("<div style='background-color:"+backgroundColor+"'><b>"+data[l].steps[i].number+"</b><p>"+data[l].steps[i].step+"</p>");
+				if (data[l].steps[i].ingredients.length !== 0) {
+					for (var j = 0; j < data[l].steps[i].ingredients.length; j++) {
+						$("#selectedRecipe").append("<img src="+data[l].steps[i].ingredients[j].image+">");
+					}
+				}
+				if (data[l].steps[i].equipment.length !== 0) {
+					for (var k = 0; k < data[l].steps[i].equipment.length; k++) {
+						$("#selectedRecipe").append("<img src="+data[l].steps[i].equipment[k].image+">");
+					}
+				}
+				$("#selectedRecipe").append("<hr>");
+			}
+		}
+		$("#selectedRecipe").append("</div>");
+	}
 };
 
 function doIt() {
-   	var options = fixedEncodeURIComponent(localStorage.getItem('cupboardIngredients'));
+	var options = fixedEncodeURIComponent(localStorage.getItem('cupboardIngredients'));
 
-    var firstRequest = function() {
+	var firstRequest = function() {
 		return $.ajax({
-		    url: 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/findByIngredients?fillIngredients=true&ingredients='+options+'&limitLicense=false&number=5&ranking=2',
+			url: 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/findByIngredients?fillIngredients=true&ingredients='+options+'&limitLicense=false&number=5&ranking=2',
 		    // The URL to the API. You can get this by clicking on "Show CURL example" from an API profile
 		    type: 'GET', // The HTTP Method, can be GET POST PUT DELETE etc
 		    data: {}, // Additional parameters here
@@ -161,8 +161,8 @@ function doIt() {
 	};
 
 	function secondRequest(data, textStatus, jqXHR) {
-	   return $.ajax({
-		    url: 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/findByIngredients?fillIngredients=true&ingredients='+options+'&limitLicense=false&number=5&ranking=1',
+		return $.ajax({
+			url: 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/findByIngredients?fillIngredients=true&ingredients='+options+'&limitLicense=false&number=5&ranking=1',
 		    // The URL to the API. You can get this by clicking on "Show CURL example" from an API profile
 		    type: 'GET', // The HTTP Method, can be GET POST PUT DELETE etc
 		    data: {}, // Additional parameters here
@@ -182,7 +182,7 @@ function doIt() {
 function requestTitle(id) {
 	// Because the API needs multiple requests to get the link to the recipe
 	var self = this;
-		self.id = id;
+	self.id = id;
 	var output = $.ajax({
 	    url: 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/'+self.id+'/analyzedInstructions?stepBreakdown=true', // The URL to the API. You can get this by clicking on "Show CURL example" from an API profile
 	    type: 'GET', // The HTTP Method, can be GET POST PUT DELETE etc
@@ -193,7 +193,7 @@ function requestTitle(id) {
 	        //To see the whole object you can output it to your browser console using:
 	        returnedData = data;
 	        handleReturnedRecipeSteps(data);
-        },
+	    },
 	    error: function(err) { alert(err); },
 	    beforeSend: function(xhr) { xhr.setRequestHeader("X-Mashape-Authorization", MASHAPE_KEY); }
 	});
@@ -203,7 +203,7 @@ function findUPC() {
 	// Because the API needs multiple requests to get the link to the recipe
 
 	var self = this;
-		self.code = $("#UPCinput").val();
+	self.code = $("#UPCinput").val();
 	var output = $.ajax({
 	    url: 'https://nutritionix-api.p.mashape.com/v1_1/item?upc='+self.code, // The URL to the API. You can get this by clicking on "Show CURL example" from an API profile
 	    type: 'GET', // The HTTP Method, can be GET POST PUT DELETE etc
@@ -214,7 +214,7 @@ function findUPC() {
 	        //To see the whole object you can output it to your browser console using:
 	        returnedData = data;
 	        handleReturnedItem(data);
-        },
+	    },
 	    error: function(err) { alert(err); },
 	    beforeSend: function(xhr) { xhr.setRequestHeader("X-Mashape-Authorization", MASHAPE_KEY); }
 	});
@@ -223,16 +223,16 @@ function findUPC() {
 handleReturnedItem = function(data){
 	console.log(data);
 
-    $("ul#UPCreturn").append("<li>" + data.item_name + "</li>");
+	$("ul#UPCreturn").append("<li>" + data.item_name + "</li>");
 
 };
 
 var arrayOfStartingIngredients = ["apples", "flour", "sugar", "onions", "lettuce", "tomato", "tuna", "milk", "cheese", "parmesan", "beef", "mushrooms", "sour cream", "cumin", "canned black beans", "hot sauce", "green onions", "cilantro", "instant yeast", "red bell pepper", "sharp cheddar cheese"];
 
 function fixedEncodeURIComponent (str) {
-  return encodeURIComponent(str).replace(/[!'()*]/g, function(c) {
-    return '%' + c.charCodeAt(0).toString(16);
-  });
+	return encodeURIComponent(str).replace(/[!'()*]/g, function(c) {
+		return '%' + c.charCodeAt(0).toString(16);
+	});
 }
 
 function initIngredients(array) {
@@ -273,6 +273,37 @@ function removeIngredient(index) {
 </head>
 <body>
 	<!-- <img src="cake.jpg" style="max-height: 180px;"> -->
+	<section id="container" class="container">
+		<h3>Copied from example of QuaggaJS</h3>
+
+		<div class="controls">
+			<fieldset class="input-group">
+				<input type="file" accept="image/*;capture=camera"/>
+				<button>Rerun</button>
+			</fieldset>
+			<fieldset class="reader-config-group">
+				<label>
+					<span>Barcode-Type</span>
+					<select name="decoder_readers">
+						<option value="code_128" >Code 128</option>
+						<option value="code_39">Code 39</option>
+						<option value="code_39_vin">Code 39 VIN</option>
+						<option value="ean">EAN</option>
+						<option value="ean_extended">EAN-extended</option>
+						<option value="ean_8">EAN-8</option>
+						<option value="upc" selected="selected">UPC</option>
+						<option value="upc_e">UPC-E</option>
+						<option value="codabar">Codabar</option>
+						<option value="i2of5">ITF</option>
+					</select>
+				</label>
+			</fieldset>
+		</div>
+		<div id="result_strip">
+			<ul class="thumbnails"></ul>
+		</div>
+		<div id="interactive" class="viewport"></div>
+	</section>
 	<h1>Recipies you can make now</h1>
 	<h2>These are the ingredients that are in your fridge/cupboard:</h2>
 	<div id="ingredients">
@@ -280,54 +311,22 @@ function removeIngredient(index) {
 			<span id="removeThis" ><button onclick="initIngredients(arrayOfStartingIngredients);">CLICK THIS FIRST, PLEASE</button></span>
 		</b>
 	</div>
-<div>
-		<h3>(Click ingredients to remove them from the list)</h3>
-	    Add ingredient: <input id="input" placeholder="What ingredient?" />
-	    <button onclick="addIngredient()" type="submit">Add</button>
-	    </div>
 	<div>
+		<h3>(Click ingredients to remove them from the list)</h3>
+		Add ingredient: <input id="input" placeholder="What ingredient?" />
+		<button onclick="addIngredient()" type="submit">Add</button>
+	</div>
+	<div>
+		Find UPC: <input id="UPCinput" placeholder="What is the UPC?" />
+		<button onclick="findUPC()" type="submit">Find</button>
+		<div id="UPCreturn">Returns:<ul id="UPCreturn"></ul></div>
+	</div>
 
-	Find UPC: <input id="UPCinput" placeholder="What is the UPC?" />
-	<button onclick="findUPC()" type="submit">Find</button>
-	<div id="UPCreturn">Returns:<ul id="UPCreturn"></ul></div>
-</div>
-  	<section id="container" class="container">
-  	<h3>Copied from example of QuaggaJS</h3>
-
-  <div class="controls">
-      <fieldset class="input-group">
-          <input type="file" accept="image/*;capture=camera"/>
-          <button>Rerun</button>
-      </fieldset>
-      <fieldset class="reader-config-group">
-          <label>
-              <span>Barcode-Type</span>
-              <select name="decoder_readers">
-                  <option value="code_128" >Code 128</option>
-                  <option value="code_39">Code 39</option>
-                  <option value="code_39_vin">Code 39 VIN</option>
-                  <option value="ean" selected="selected">EAN</option>
-                  <option value="ean_extended">EAN-extended</option>
-                  <option value="ean_8">EAN-8</option>
-                  <option value="upc">UPC</option>
-                  <option value="upc_e">UPC-E</option>
-                  <option value="codabar">Codabar</option>
-                  <option value="i2of5">ITF</option>
-              </select>
-          </label>
-      </fieldset>
-  </div>
-  <div id="result_strip">
-    <ul class="thumbnails"></ul>
-  </div>
-  <div id="interactive" class="viewport"></div>
-</section>
-
-  	<button onclick="doIt()">Request Recipes</button>
-  	<div id="selectedRecipe"></div>
-  	<div id="output">The top recipes returned is:</div>
-<script src="quagga.js" type="text/javascript"></script>
-<script src="file_input.js" type="text/javascript"></script>
-    <script src="https://serratus.github.io/quaggaJS/javascripts/scale.fix.js"></script>
+	<button onclick="doIt()">Request Recipes</button>
+	<div id="selectedRecipe"></div>
+	<div id="output">The top recipes returned is:</div>
+	<script src="quagga.js" type="text/javascript"></script>
+	<script src="file_input.js" type="text/javascript"></script>
+	<script src="https://serratus.github.io/quaggaJS/javascripts/scale.fix.js"></script>
 </body>
 </html>

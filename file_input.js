@@ -62,7 +62,7 @@ $(function() {
             var self = this,
                 config = $.extend({}, self.state, {src: src});
 
-            Quagga.decodeSingle(config, function(result) {console.log(result.codeResult.code);});
+            Quagga.decodeSingle(config, function(result) {});
         },
         setState: function(path, value) {
             var self = this;
@@ -155,6 +155,7 @@ $(function() {
         var code = result.codeResult.code,
             $node,
             canvas = Quagga.canvas.dom.image;
+        console.log(code);
 
         $node = $('<li><div class="thumbnail"><div class="imgWrapper"><img /></div><div class="caption"><h4 class="code"></h4></div></div></li>');
         $node.find("img").attr("src", canvas.toDataURL());

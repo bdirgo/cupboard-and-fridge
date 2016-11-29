@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="knockout.js"></script>
+	<script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+	<script src="basil.js"></script>
+	<script type="text/javascript" src="underscore.js"></script>
+  <meta charset="utf-8">
+  <title>Spoontacular Query</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="utf-8">
+	<!-- <link rel="stylesheet" type="text/css" href="bootstrap.css"> -->
+	<style>
+		html, body {
+			height: 100%;
+			margin: 0;
+			padding: 0;
+		}
+		#map {
+			height: 640px;
+		}
+	</style>
+</head>
+<body>
+  <script>
+
+var returnedData = {},
+	formattedFood = {},
+	MASHAPE_KEY = "bjHmzyPtdhmshS94AOg2I1aPO3afp1BJuqJjsn9aYqzPQzTfJu";
+
+handleReturnedRecipes = function(data) {
+    //Change data.source to data.something , where something is whichever part of the object you want returned.
+    //To see the whole object you can output it to your browser console using:
+    console.log(data);
+	$("#output").empty();
+    for (var i = data.length - 1; i >= 0; i--) {
+    	$('#output').append("<div id="+data[i].id+"><img src="+data[i].image+" style='max-height:180px;'><h3>"+data[i].title+"</h3>"+"<h4>"+data[i].likes+"</h4><button id="+data[i].id+" onClick='requestTitle("+data[i].id+")'>More Info</button><hr></div>");
+	}
+};
+
+handleReturnedCloseRecipes = function(data) {
+    //Change data.source to data.something , where something is whichever part of the object you want returned.
+    //To see the whole object you can output it to your browser console using:
+	var backgroundColor = '#'+(Math.random()*0xFFFFFF<<0).toString(16);
+    console.log(data);
+    for (var i = data.length - 1; i >= 0; i--) {
+    	$('#output').append("<h3 style=background-color:"+backgroundColor+">These Recipes are so close you can taste it!</h3><hr><div id="+data[i].id+"><img src="+data[i].image+" style='max-height:180px;'><h3>"+data[i].title+"</h3>"+"<h4>"+data[i].likes+"</h4><button id="+data[i].id+" onClick='requestTitle("+data[i].id+")'>More Info</button><hr></div>");
+	}
+};
+
+handleReturnedRecipeSteps = function (data) {
+	console.log(data);
+	var backgroundColor = '#'+(Math.random()*0xFFFFFF<<0).toString(16);
+	$("#selectedRecipe").empty();
+    for (var l =0; l < data.length; l++) {
+    	if (data[l].steps.length !== 0) {
+	    	for (var i = 0; i < data[l].steps.length; i++) {
+	        	$("#selectedRecipe").append("<div style='background-color:"+backgroundColor+"'><b>"+data[l].steps[i].number+"</b><p>"+data[l].steps[i].step+"</p>");
+	        	if (data[l].steps[i].ingredients.length !== 0) {
+		        	for (var j = 0; j < data[l].steps[i].ingredients.length; j++) {
+		        		$("#selectedRecipe").append("<img src="+data[l].steps[i].ingredients[j].image+">");
+		        	}
+		        }
+		        if (data[l].steps[i].equipment.length !== 0) {
+		        	for (var k = 0; k < data[l].steps[i].equipment.length; k++) {
+		        		$("#selectedRecipe").append("<img src="+data[l].steps[i].equipment[k].image+">");
+		        	}
+		        }
+		        $("#selectedRecipe").append("<hr>");
+	        }
+	    }
+        $("#selectedRecipe").append("</div>");
+    }
+};
+
+function doIt() {
+   	var options = fixedEncodeURIComponent(localStorage.getItem('cupboardIngredients'));
+
+    var firstRequest = function() {
+		return $.ajax({
+		    url: 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/findByIngredients?fillIngredients=true&ingredients='+options+'&limitLicense=false&number=5&ranking=2',
+		    // The URL to the API. You can get this by clicking on "Show CURL example" from an API profile
+		    type: 'GET', // The HTTP Method, can be GET POST PUT DELETE etc
+		    data: {}, // Additional parameters here
+		    dataType: 'json',
+		    success: function(results) {
+		    	returnedData = results;
+		    	handleReturnedRecipes(results);
+		    },
+		    error: function(err) { alert(err); },
+		    beforeSend: function(xhr) { xhr.setRequestHeader("X-Mashape-Authorization", MASHAPE_KEY);}
+		});
+	};
+
+	function secondRequest(data, textStatus, jqXHR) {
+	   return $.ajax({
+		    url: 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/findByIngredients?fillIngredients=true&ingredients='+options+'&limitLicense=false&number=5&ranking=1',
+		    // The URL to the API. You can get this by clicking on "Show CURL example" from an API profile
+		    type: 'GET', // The HTTP Method, can be GET POST PUT DELETE etc
+		    data: {}, // Additional parameters here
+		    dataType: 'json',
+		    success: function(results) {
+		    	returnedData = results;
+		    	handleReturnedCloseRecipes(results);
+		    },
+		    error: function(err) { alert(err); },
+		    beforeSend: function(xhr) { xhr.setRequestHeader("X-Mashape-Authorization", MASHAPE_KEY);}
+		});
+	}
+
+	firstRequest().then(secondRequest);
+}
+
+function requestTitle(id) {
+	// Because the API needs multiple requests to get the link to the recipe
+	var self = this;
+		self.id = id;
+	var output = $.ajax({
+	    url: 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/'+self.id+'/analyzedInstructions?stepBreakdown=true', // The URL to the API. You can get this by clicking on "Show CURL example" from an API profile
+	    type: 'GET', // The HTTP Method, can be GET POST PUT DELETE etc
+	    data: {}, // Additional parameters here
+	    dataType: 'json',
+	    success: function(data) {
+	        //Change data.source to data.something , where something is whichever part of the object you want returned.
+	        //To see the whole object you can output it to your browser console using:
+	        returnedData = data;
+	        handleReturnedRecipeSteps(data);
+        },
+	    error: function(err) { alert(err); },
+	    beforeSend: function(xhr) { xhr.setRequestHeader("X-Mashape-Authorization", MASHAPE_KEY); }
+	});
+}
+
+var arrayOfStartingIngredients = ["apples", "flour", "sugar", "onions", "lettuce", "tomato", "tuna", "milk", "cheese", "parmesan", "beef", "mushrooms", "sour cream", "cumin", "canned black beans", "hot sauce", "green onions", "cilantro", "instant yeast", "red bell pepper", "sharp cheddar cheese"];
+
+function fixedEncodeURIComponent (str) {
+  return encodeURIComponent(str).replace(/[!'()*]/g, function(c) {
+    return '%' + c.charCodeAt(0).toString(16);
+  });
+}
+
+function initIngredients(array) {
+	localStorage.setItem('cupboardIngredients', JSON.stringify(array));
+	$.each(array, function (index, value) {
+		$("div#ingredients").append("<span id="+index+" onclick='removeIngredient("+index+")' class='singleIngredient'> "+ value + " </span>");
+	});
+	$("#removeThis").empty();
+}
+
+function addIngredient() {
+	var inputVal = $("input#input").val();
+	var array = JSON.parse(localStorage.getItem('cupboardIngredients'));
+	array.push(inputVal);
+	localStorage.setItem('cupboardIngredients', JSON.stringify(array));
+	$("div#ingredients").append("<span id="+array.length+" onclick='removeIngredient("+array.length+")' class='singleIngredient'> "+ inputVal + " </span>");
+	$("input#input").val('');
+}
+
+function removeIngredient(index) {
+	console.log(JSON.parse(localStorage.getItem('cupboardIngredients')));
+	var array = JSON.parse(localStorage.getItem('cupboardIngredients'));
+	delete array[index];
+	localStorage.setItem('cupboardIngredients', JSON.stringify(array));
+	console.log(JSON.parse(localStorage.getItem('cupboardIngredients')));
+	$("span#"+index).empty();
+}
+
+</script>
+</head>
+<body>
+	<!-- <img src="cake.jpg" style="max-height: 180px;"> -->
+	<h1>Recipies you can make now</h1>
+	<h2>These are the ingredients that are in your fridge/cupboard:</h2>
+	<b>
+		<div id="ingredients">
+			<span id="removeThis" ><button onclick="initIngredients(arrayOfStartingIngredients);">CLICK THIS FIRST</button></span>
+		</div>
+	</b>
+	<h3>(Click ingredients to remove them from the list)</h3>
+    Add ingredient: <input id="input" placeholder="What ingredient?" />
+    <button onclick="addIngredient()" type="submit">Add</button>
+  	<button onclick="doIt()">Request Recipes</button>
+  	<div id="selectedRecipe"></div>
+  	<div id="output">The top recipes returned is:</div>
+</body>
+</html>

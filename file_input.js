@@ -9,7 +9,11 @@ $(function() {
         },
         attachListeners: function() {
             var self = this;
-        	document.cookie = "";
+	        var date = new Date();
+	        date.setTime(date.getTime()+(-1*24*60*60*1000));
+	        expires = "; expires="+date.toUTCString();
+
+		    document.cookie = "UPC="+""+expires+"; path=/";
 
             $(".controls input[type=file]").on("change", function(e) {
                 if (e.target.files && e.target.files.length) {
@@ -157,7 +161,10 @@ $(function() {
             $node,
             canvas = Quagga.canvas.dom.image;
 
-        document.cookie = "UPC=" + code;
+        var date = new Date();
+        date.setTime(date.getTime()+(0.01*24*60*60*1000));
+        var expires = "; expires="+date.toGMTString();
+	    document.cookie = "UPC="+code+expires+"; path=/";
 
         $node = $('<li><div class="thumbnail"><div class="imgWrapper"><img /></div><div class="caption"><h4 class="code"></h4></div></div></li>');
         $node.find("img").attr("src", canvas.toDataURL());

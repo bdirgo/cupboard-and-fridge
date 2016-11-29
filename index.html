@@ -9,7 +9,7 @@
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
     <meta charset="utf-8">
-    <title>Spoontacular Query</title>
+    <title>Cupboard/Fridge Recipe Search</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="utf-8">
     <!-- <link rel="stylesheet" type="text/css" href="bootstrap.css"> -->
@@ -109,7 +109,8 @@
 handleReturnedCloseRecipes = function(data) {
     //Change data.source to data.something , where something is whichever part of the object you want returned.
     //To see the whole object you can output it to your browser console using:
-    var backgroundColor = '#'+(Math.random()*0xFFFFFF<<0).toString(16);
+    // var backgroundColor = '#'+(Math.random()*0xFFFFFF<<0).toString(16);
+    var backgroundColor = "#FEEDED";
     console.log(data);
     for (var i = data.length - 1; i >= 0; i--) {
     	$('#output').append("<h3 style=background-color:"+backgroundColor+">These Recipes are so close you can taste it!</h3><hr><div id="+data[i].id+"><img src="+data[i].image+" style='max-height:180px;'><h3>"+data[i].title+"</h3>"+"<h4>"+data[i].likes+"</h4><button id="+data[i].id+" onClick='requestTitle("+data[i].id+")'>More Info</button><hr></div>");
@@ -118,7 +119,8 @@ handleReturnedCloseRecipes = function(data) {
 
 handleReturnedRecipeSteps = function (data) {
 	console.log(data);
-	var backgroundColor = '#'+(Math.random()*0xFFFFFF<<0).toString(16);
+	var backgroundColor = "#DBDBDB";
+	// var backgroundColor = '#'+(Math.random()*0xFFFFFF<<0).toString(16);
 	$("#selectedRecipe").empty();
 	for (var l =0; l < data.length; l++) {
 		if (data[l].steps.length !== 0) {
@@ -279,7 +281,7 @@ function removeIngredient(index) {
 		<div class="controls">
 			<fieldset class="input-group">
 				<input type="file" accept="image/*;capture=camera"/>
-				<button>Rerun</button>
+				<div><button>Run Barcode</button></div>
 			</fieldset>
 			<fieldset class="reader-config-group">
 				<label>
@@ -319,7 +321,7 @@ function removeIngredient(index) {
 	<div>
 		Find UPC: <input id="UPCinput" placeholder="What is the UPC?" />
 		<button onclick="findUPC()" type="submit">Find</button>
-		<div id="UPCreturn">Returns:<ul id="UPCreturn"></ul></div>
+		<div id="UPCreturn">UPC has found:<ul id="UPCreturn"></ul></div>
 	</div>
 
 	<button onclick="doIt()">Request Recipes</button>

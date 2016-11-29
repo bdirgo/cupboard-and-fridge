@@ -24,7 +24,13 @@
   and (min-device-width: 320px)
   and (max-device-width: 480px)
   and (-webkit-min-device-pixel-ratio: 2) {
+	canvas {
+		max-width: 200px;
+	}
 
+	ul.thumbnails {
+		max-width: 180px;
+	}
 }
 
 /* Portrait */
@@ -51,7 +57,13 @@
   and (min-device-width: 320px)
   and (max-device-width: 568px)
   and (-webkit-min-device-pixel-ratio: 2) {
+	canvas {
+		max-width: 250px;
+	}
 
+	ul.thumbnails {
+		max-width: 200px;
+	}
 }
 
 /* Portrait */
@@ -306,7 +318,6 @@ function removeIngredient(index) {
   </div>
   <div id="interactive" class="viewport"></div>
 </section>
-<hr>
 
   	<button onclick="doIt()">Request Recipes</button>
   	<div id="selectedRecipe"></div>

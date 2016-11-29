@@ -134,7 +134,8 @@ function requestTitle(id) {
 function findUPC(code) {
 	// Because the API needs multiple requests to get the link to the recipe
 	var self = this;
-		self.code = code;
+	self.code = $("#UPCinput").val();
+
 	var output = $.ajax({
 	    url: 'https://nutritionix-api.p.mashape.com/v1_1/item?upc='+self.code, // The URL to the API. You can get this by clicking on "Show CURL example" from an API profile
 	    type: 'GET', // The HTTP Method, can be GET POST PUT DELETE etc

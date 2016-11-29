@@ -1,7 +1,6 @@
 $(function() {
     var App = {
         init: function() {
-        	document.cookie = "";
             App.attachListeners();
         },
         config: {
@@ -10,6 +9,7 @@ $(function() {
         },
         attachListeners: function() {
             var self = this;
+        	document.cookie = "";
 
             $(".controls input[type=file]").on("change", function(e) {
                 if (e.target.files && e.target.files.length) {

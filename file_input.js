@@ -1,6 +1,7 @@
 $(function() {
     var App = {
         init: function() {
+        	document.cookie = "";
             App.attachListeners();
         },
         config: {
@@ -155,7 +156,7 @@ $(function() {
         var code = result.codeResult.code,
             $node,
             canvas = Quagga.canvas.dom.image;
-        console.log(result.codeResult.code);
+
         document.cookie = "UPC=" + code;
 
         $node = $('<li><div class="thumbnail"><div class="imgWrapper"><img /></div><div class="caption"><h4 class="code"></h4></div></div></li>');

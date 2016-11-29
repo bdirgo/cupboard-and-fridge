@@ -229,7 +229,7 @@ function findUPC() {
 
 handleReturnedItem = function(data){
 	console.log(data);
-
+	createCookie("ingredient",data.item_name);
 	$("ul#UPCreturn").append("<li>" + data.item_name + "</li>");
 
 };
@@ -286,7 +286,12 @@ function initIngredients(array) {
 }
 
 function addIngredient() {
-	var inputVal = $("input#input").val();
+	var inputVal;
+	if ($("input#input").val()) {
+		inputVal = $("input#input").val();
+	} else {
+		inputVal = readCookie("ingredient");
+	}
 	var array = JSON.parse(localStorage.getItem('cupboardIngredients'));
 	array.push(inputVal);
 	localStorage.setItem('cupboardIngredients', JSON.stringify(array));

@@ -205,10 +205,10 @@ function findUPC() {
 	// Because the API needs multiple requests to get the link to the recipe
 
 	var self = this;
-	if (document.cookie) {
-		self.code = readCookie(UPC);
-	} else {
+	if ($("#UPCinput").val()) {
 		self.code = $("#UPCinput").val();
+	} else {
+		self.code = readCookie("UPC");
 	}
 
 	var output = $.ajax({
@@ -333,10 +333,10 @@ function removeIngredient(index) {
 				</label>
 			</fieldset>
 		</div>
-		<div id="result_strip">
-			<ul class="thumbnails"></ul>
-		</div>
-		<div id="interactive" class="viewport"></div>
+		<!-- <div id="result_strip"> -->
+			<!-- <ul class="thumbnails"></ul> -->
+		<!-- </div> -->
+		<!-- <div id="interactive" class="viewport"></div> -->
 	</section>
 	<h1>Recipies you can make now</h1>
 	<h2>These are the ingredients that are in your fridge/cupboard:</h2>

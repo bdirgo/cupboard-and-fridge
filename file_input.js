@@ -62,7 +62,7 @@ $(function() {
             var self = this,
                 config = $.extend({}, self.state, {src: src});
 
-            Quagga.decodeSingle(config, function(result) {});
+            Quagga.decodeSingle(config, function(result) {console.log(result.codeResult.code);});
         },
         setState: function(path, value) {
             var self = this;

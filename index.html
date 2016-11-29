@@ -229,7 +229,7 @@ function findUPC() {
 
 handleReturnedItem = function(data){
 	console.log(data);
-	createCookie("ingredient",data.item_name);
+	createCookie("ingredient",data.item_name,0.01);
 	$("ul#UPCreturn").append("<li>" + data.item_name + "</li>");
 
 };
@@ -289,7 +289,7 @@ function addIngredient() {
 	var inputVal;
 	if ($("input#input").val()) {
 		inputVal = $("input#input").val();
-	} else {
+	} else if (readCookie("ingredient") !== null) {
 		inputVal = readCookie("ingredient");
 	}
 	var array = JSON.parse(localStorage.getItem('cupboardIngredients'));

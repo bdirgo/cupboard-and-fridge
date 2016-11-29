@@ -312,7 +312,7 @@ function removeIngredient(index) {
 </head>
 <body>
 	<!-- <img src="cake.jpg" style="max-height: 180px;"> -->
-	
+
 	<h1>Recipies you can make now</h1>
 	<h2>These are the ingredients that are in your fridge/cupboard:</h2>
 	<div id="ingredients">
@@ -322,30 +322,29 @@ function removeIngredient(index) {
 		</b>
 	</div>
 	<section id="container" class="container">
-		<h3>Copied from example of QuaggaJS</h3>
-
 		<div class="controls">
 			<fieldset class="input-group">
+				<p>Scan barcodes by clicking "Choose File:" and "Take Picture"</p>
 				<input type="file" accept="image/*;capture=camera"/>
-				<div><button>Run Barcode</button></div>
 			</fieldset>
 			<fieldset class="reader-config-group">
 				<label>
 					<span>Barcode-Type</span>
 					<select name="decoder_readers">
 						<option value="code_128" >Code 128</option>
-						<option value="code_39">Code 39</option>
-						<option value="code_39_vin">Code 39 VIN</option>
+						<!-- <option value="code_39">Code 39</option> -->
+						<!-- <option value="code_39_vin">Code 39 VIN</option> -->
 						<option value="ean" selected="selected">EAN</option>
 						<option value="ean_extended">EAN-extended</option>
-						<option value="ean_8">EAN-8</option>
+						<!-- <option value="ean_8">EAN-8</option> -->
 						<option value="upc" >UPC</option>
 						<option value="upc_e">UPC-E</option>
-						<option value="codabar">Codabar</option>
-						<option value="i2of5">ITF</option>
+						<!-- <option value="codabar">Codabar</option> -->
+						<!-- <option value="i2of5">ITF</option> -->
 					</select>
 				</label>
 			</fieldset>
+			<div><button>Add Barcode to Cookie</button></div>
 		</div>
 		<!-- <div id="result_strip"> -->
 			<!-- <ul class="thumbnails"></ul> -->
@@ -353,18 +352,18 @@ function removeIngredient(index) {
 		<!-- <div id="interactive" class="viewport"></div> -->
 	</section>
 	<div>
-		Find UPC: <input id="UPCinput" placeholder="What is the UPC?" />
-		<button onclick="findUPC()" type="submit">Find</button>
+		<button onclick="findUPC()" type="submit">Find Product from UPC</button>
+		<input id="UPCinput" placeholder="Enter UPC manually here" />
 		<div id="UPCreturn">UPC has found:<ul id="UPCreturn"></ul></div>
 	</div>
 	<div>
-		Add ingredient: <input id="input" placeholder="What ingredient?" />
-		<button onclick="addIngredient()" type="submit">Add</button>
+		<button onclick="addIngredient()" type="submit">Add Ingredient</button>
+		<input id="input" placeholder="Manually enter ingredient name here" />
 	</div>
 
-	<button onclick="doIt()">Request Recipes</button>
+	<button onclick="doIt()">Find Recipes</button>
 	<div id="selectedRecipe"></div>
-	<div id="output">The top recipes returned is:</div>
+	<div id="output">The first recipes returned are:</div>
 	<script src="quagga.js" type="text/javascript"></script>
 	<script src="file_input.js" type="text/javascript"></script>
 	<script src="https://serratus.github.io/quaggaJS/javascripts/scale.fix.js"></script>

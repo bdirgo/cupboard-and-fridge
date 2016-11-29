@@ -131,11 +131,11 @@ function requestTitle(id) {
 	});
 }
 
-function findUPC(code) {
+function findUPC() {
 	// Because the API needs multiple requests to get the link to the recipe
-	var self = this;
-	self.code = $("#UPCinput").val();
 
+	var self = this;
+		self.code = $("#UPCinput").val();
 	var output = $.ajax({
 	    url: 'https://nutritionix-api.p.mashape.com/v1_1/item?upc='+self.code, // The URL to the API. You can get this by clicking on "Show CURL example" from an API profile
 	    type: 'GET', // The HTTP Method, can be GET POST PUT DELETE etc
@@ -155,7 +155,7 @@ function findUPC(code) {
 handleReturnedItem = function(data){
 	console.log(data);
 
-    $("#ingredients").append("<span>" + data.item_name + "</span>");
+    $("#UPCreturn").append("<span>" + data.item_name + "</span>");
 
 };
 
@@ -202,34 +202,30 @@ function removeIngredient(index) {
 }
 
 </script>
+</head>
 <body>
 	<!-- <img src="cake.jpg" style="max-height: 180px;"> -->
 	<h1>Recipies you can make now</h1>
 	<h2>These are the ingredients that are in your fridge/cupboard:</h2>
 	<div id="ingredients">
 		<b>
-			<span id="removeThis" ><button onclick="initIngredients(arrayOfStartingIngredients);">CLICK THIS FIRST</button></span>
-		</b></div>
-		<h3>(Click ingredients to remove them from the list)</h3>
-	    <div>Add ingredient: <input id="input" placeholder="What ingredient?" />
-		    <button onclick="addIngredient()" type="submit">Add</button></div>
-	
+			<span id="removeThis" ><button onclick="initIngredients(arrayOfStartingIngredients);">CLICK THIS FIRST, PLEASE</button></span>
+		</b>
+	</div>
 <div>
-	Find UPC: <input id="UPCinput" placeholder="What is the UPC?" />
-	<button onclick="findUPC()" type="submit">Find</button></div>
+		<h3>(Click ingredients to remove them from the list)</h3>
+	    Add ingredient: <input id="input" placeholder="What ingredient?" />
+	    <button onclick="addIngredient()" type="submit">Add</button>
+	    </div>
+	<div>
 
+	Find UPC: <input id="UPCinput" placeholder="What is the UPC?" />
+	<button onclick="findUPC()" type="submit">Find</button>
+	<div id="UPCreturn">Returns:</div>
+</div>
   	<section id="container" class="container">
   	<h3>Copied from example of QuaggaJS</h3>
-    <h3>Working with file-input</h3>
-    <p>This example let's you select an image from your local filesystem.
-        There is no server interaction needed as the file is
-        simply accessed through the
-        <a href="http://www.w3.org/TR/file-upload/">File API</a>.
-    <p>This also works great on a wide range of mobile-phones where the
-        camera access through <code>getUserMedia</code> is still very
-        limited. </p>
-    <p>If the default configuration does not suit your use-case, you can
-        adjust various parameters of the localization and decoding process.</p>
+
   <div class="controls">
       <fieldset class="input-group">
           <input type="file" accept="image/*;capture=camera"/>
@@ -239,7 +235,7 @@ function removeIngredient(index) {
           <label>
               <span>Barcode-Type</span>
               <select name="decoder_readers">
-                  <option value="code_128" selected="selected">Code 128</option>
+                  <option value="code_128" >Code 128</option>
                   <option value="code_39">Code 39</option>
                   <option value="code_39_vin">Code 39 VIN</option>
                   <option value="ean">EAN</option>

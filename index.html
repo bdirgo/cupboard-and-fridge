@@ -270,6 +270,7 @@ function eraseCookie(name) {
 }
 
 function initIngredients(array) {
+	$("div#ingredients").append("<br>")
 	if (!localStorage.getItem('cupboardIngredients')) {
 		localStorage.setItem('cupboardIngredients', JSON.stringify(array));
 		$.each(array, function (index, value) {
@@ -277,7 +278,7 @@ function initIngredients(array) {
 		});
 	} else {
 		$.each(JSON.parse(localStorage.getItem('cupboardIngredients')),function(index, value) {
-			if (value != null) {
+			if (value !== null) {
 				$("div#ingredients").append("<span id="+index+" onclick='removeIngredient("+index+")' class='singleIngredient'> "+ value + " </span>");
 			}
 		});
@@ -352,15 +353,15 @@ function removeIngredient(index) {
 		<!-- <div id="interactive" class="viewport"></div> -->
 	</section>
 	<div>
-		<button onclick="findUPC()" type="submit">Find Product from UPC</button>
-		<input id="UPCinput" placeholder="Enter UPC manually here" />
+		<button onclick="findUPC()" type="submit">Find product</button>
+		<input id="UPCinput" placeholder="Manually enter UPC" />
 		<div id="UPCreturn">UPC has found:<ul id="UPCreturn"></ul></div>
 	</div>
 	<div>
 		<button onclick="addIngredient()" type="submit">Add Ingredient</button>
-		<input id="input" placeholder="Manually enter ingredient name here" />
+		<input id="input" placeholder="Manually enter ingredient" />
 	</div>
-
+	<br>
 	<button onclick="doIt()">Find Recipes</button>
 	<div id="selectedRecipe"></div>
 	<div id="output">The first recipes returned are:</div>

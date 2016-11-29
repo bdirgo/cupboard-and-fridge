@@ -131,6 +131,33 @@ function requestTitle(id) {
 	});
 }
 
+function findUPC(code) {
+	// Because the API needs multiple requests to get the link to the recipe
+	var self = this;
+		self.code = code;
+	var output = $.ajax({
+	    url: 'https://nutritionix-api.p.mashape.com/v1_1/item?upc='+self.code, // The URL to the API. You can get this by clicking on "Show CURL example" from an API profile
+	    type: 'GET', // The HTTP Method, can be GET POST PUT DELETE etc
+	    data: {}, // Additional parameters here
+	    dataType: 'json',
+	    success: function(data) {
+	        //Change data.source to data.something , where something is whichever part of the object you want returned.
+	        //To see the whole object you can output it to your browser console using:
+	        returnedData = data;
+	        handleReturnedItem(data);
+        },
+	    error: function(err) { alert(err); },
+	    beforeSend: function(xhr) { xhr.setRequestHeader("X-Mashape-Authorization", MASHAPE_KEY); }
+	});
+}
+
+handleReturnedItem = function(data){
+	console.log(data);
+
+    $("#ingredients").append("<span>" + data.item_name + "</span>");
+
+};
+
 var arrayOfStartingIngredients = ["apples", "flour", "sugar", "onions", "lettuce", "tomato", "tuna", "milk", "cheese", "parmesan", "beef", "mushrooms", "sour cream", "cumin", "canned black beans", "hot sauce", "green onions", "cilantro", "instant yeast", "red bell pepper", "sharp cheddar cheese"];
 
 function fixedEncodeURIComponent (str) {
@@ -179,14 +206,18 @@ function removeIngredient(index) {
 	<!-- <img src="cake.jpg" style="max-height: 180px;"> -->
 	<h1>Recipies you can make now</h1>
 	<h2>These are the ingredients that are in your fridge/cupboard:</h2>
-	<b>
-		<div id="ingredients">
+	<div id="ingredients">
+		<b>
 			<span id="removeThis" ><button onclick="initIngredients(arrayOfStartingIngredients);">CLICK THIS FIRST</button></span>
-		</div>
-	</b>
-	<h3>(Click ingredients to remove them from the list)</h3>
-    Add ingredient: <input id="input" placeholder="What ingredient?" />
-    <button onclick="addIngredient()" type="submit">Add</button>
+		</b>
+		<h3>(Click ingredients to remove them from the list)</h3>
+	    Add ingredient: <input id="input" placeholder="What ingredient?" />
+	    <button onclick="addIngredient()" type="submit">Add</button>
+	</div>
+
+	Find UPC: <input id="input" placeholder="What is the UPC?" />
+	<button onclick="findUPC()" type="submit">Find</button>
+
   	<section id="container" class="container">
   	<h3>Copied from example of QuaggaJS</h3>
     <h3>Working with file-input</h3>

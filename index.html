@@ -207,7 +207,7 @@ function findUPC() {
 handleReturnedItem = function(data){
 	console.log(data);
 
-    $("#UPCreturn").append("<li>" + data.item_name + "</li>");
+    $("ul#UPCreturn").append("<li>" + data.item_name + "</li>");
 
 };
 
@@ -273,7 +273,7 @@ function removeIngredient(index) {
 
 	Find UPC: <input id="UPCinput" placeholder="What is the UPC?" />
 	<button onclick="findUPC()" type="submit">Find</button>
-	<div id="UPCreturn">Returns:<ul></div></ul>
+	<div id="UPCreturn">Returns:<ul id="UPCreturn"></ul></div>
 </div>
   	<section id="container" class="container">
   	<h3>Copied from example of QuaggaJS</h3>

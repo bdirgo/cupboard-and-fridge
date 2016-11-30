@@ -279,7 +279,7 @@ function initIngredients(array) {
 	} else {
 		$.each(JSON.parse(localStorage.getItem('cupboardIngredients')),function(index, value) {
 			if (value !== null) {
-				$("ul#ingredients").append("<span id="+index+" onclick='removeIngredient("+index+")' class='singleIngredient'> "+ value + " </span>");
+				$("ul#ingredients").append("<span onclick='removeIngredient("+index+")' class='singleIngredient'> "+ value + " </span>");
 			}
 		});
 	}
@@ -296,7 +296,7 @@ function addIngredient() {
 	var array = JSON.parse(localStorage.getItem('cupboardIngredients'));
 	array.push(inputVal);
 	localStorage.setItem('cupboardIngredients', JSON.stringify(array));
-	$("ul#ingredients").append("<span onclick='removeIngredient("+array.length+")' class='singleIngredient'> "+ inputVal + " </span>");
+	$("ul#ingredients").append("<span onclick='removeIngredient("+ (array.length - 1) +")' class='singleIngredient'> "+ inputVal + " </span>");
 	$("input#input").val('');
 }
 

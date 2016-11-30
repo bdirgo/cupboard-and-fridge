@@ -311,13 +311,13 @@ function removeIngredient(index) {
 }
 
 function visibleBarcode() {
-	$("div.add-barcode").css('visibility', 'visible');
-	$("div.recipes").css('visibility', 'hidden');
+	$("div.add-barcode").css('display', 'inline');
+	$("div.recipes").css('display', 'none');
 }
 
 function visibleRecipies() {
-	$("div.add-barcode").css('visibility', 'hidden');
-	$("div.recipes").css('visibility', 'visible');
+	$("div.add-barcode").css('display', 'none');
+	$("div.recipes").css('display', 'inline');
 }
 
 	$(document).ready(function(){

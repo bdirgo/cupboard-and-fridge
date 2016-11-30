@@ -358,7 +358,7 @@ function removeIngredient(index) {
 		<!-- <div id="interactive" class="viewport"></div> -->
 	</section>
 	<div>
-		<button onclick="$('h4.code').promise().done(findUPC()).then(addIngredient());" >Add Barcode</button>
+		<button onclick="$('h4.code').promise().then(findUPC()).then(addIngredient());" >Add Barcode</button>
 	</div>
 	<div>
 		<button onclick="findUPC()" type="submit">Find product</button>

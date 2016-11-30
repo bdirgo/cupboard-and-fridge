@@ -17,9 +17,6 @@
 
     	ul {
     		list-style-type:none;
-    		max-height: 250px; 
-    		height: 250px; 
-    		overflow: auto;
     	}
 
     	canvas {
@@ -274,16 +271,15 @@ function eraseCookie(name) {
 }
 
 function initIngredients(array) {
-	// $("div#ingredients").append("<br>");
 	if (!localStorage.getItem('cupboardIngredients')) {
 		localStorage.setItem('cupboardIngredients', JSON.stringify(array));
 		$.each(array, function (index, value) {
-			$("ul#ingredients").append("<li id="+index+" onclick='removeIngredient("+index+")' class='singleIngredient'> "+ value + " </li>");
+			$("ul#ingredients").append("<span onclick='removeIngredient("+index+")' class='singleIngredient'> "+ value + " </span>");
 		});
 	} else {
 		$.each(JSON.parse(localStorage.getItem('cupboardIngredients')),function(index, value) {
 			if (value !== null) {
-				$("ul#ingredients").append("<li id="+index+" onclick='removeIngredient("+index+")' class='singleIngredient'> "+ value + " </li>");
+				$("ul#ingredients").append("<span id="+index+" onclick='removeIngredient("+index+")' class='singleIngredient'> "+ value + " </span>");
 			}
 		});
 	}

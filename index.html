@@ -157,6 +157,8 @@ handleReturnedRecipeSteps = function (data) {
 
 function doIt() {
 	var options = fixedEncodeURIComponent(localStorage.getItem('cupboardIngredients'));
+	$("#selectedRecipe").empty();
+	$("#output").empty();
 
 	var firstRequest = function() {
 		return $.ajax({

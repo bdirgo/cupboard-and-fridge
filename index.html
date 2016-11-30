@@ -355,7 +355,8 @@ $(document).ready(function(){
 		<p>The list of ingredients above will be used to search for recipes.</p>
 		<button onclick="doIt()">Find Recipes</button>
 		<div id="selectedRecipe"></div>
-		<div id="output">The first recipes returned are:</div>
+		<p>The first recipes returned are:</p>
+		<div id="output"></div>
 	</div>
 	<div class="add-barcode">
 	<button onclick="visibleRecipies();">Find Recipes</button>
@@ -383,9 +384,9 @@ $(document).ready(function(){
 						</select>
 					</label>
 				</fieldset>
-			</div>
+			</div><button>Click this if nothing happens</button>
 			<div id="result_strip">
-				<ul class="thumbnails"></ul>
+				<ul class="thumbnails"><li></li></ul>
 			</div>
 			<!-- <div id="interactive" class="viewport"></div> -->
 		</section>

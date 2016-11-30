@@ -319,6 +319,16 @@ function visibleRecipies() {
 	$("div.recipes").css('display', 'inline');
 }
 
+function visibleRecipe() {
+	$("div.selectedRecipe").css('display', 'inline');
+	$("div.output").css('display', 'none');
+}
+
+function visibleOutput() {
+	$("div.selectedRecipe").css('display', 'none');
+	$("div.output").css('display', 'inline');
+}
+
 $(document).ready(function(){
 	$("div.add-barcode").css('display', 'none');
 	initIngredients(arrayOfStartingIngredients);

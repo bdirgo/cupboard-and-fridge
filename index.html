@@ -314,7 +314,10 @@ function removeIngredient(index) {
 	$("span#"+index).empty();
 }
 
-      initIngredients(arrayOfStartingIngredients);
+      	$(document).ready(function(){
+		initIngredients(arrayOfStartingIngredients);
+	});
+
   }(window.jQuery, window, document));
   // The global jQuery object is passed as a parameter
 

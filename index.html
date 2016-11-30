@@ -279,7 +279,7 @@ function initIngredients(array) {
 	} else {
 		$.each(JSON.parse(localStorage.getItem('cupboardIngredients')),function(index, value) {
 			if (value !== null) {
-				$("ul#ingredients").append("<span id="+index+" onclick='removeIngredient("+index+")' class='singleIngredient'> "+ value + " </span>");
+				$("ul#ingredients").append("<li id="+index+" onclick='removeIngredient("+index+")' class='singleIngredient'> "+ value + " </li>");
 			}
 		});
 	}

@@ -14,7 +14,19 @@
     <meta charset="utf-8">
     <!-- <link rel="stylesheet" type="text/css" href="bootstrap.css"> -->
     <style>
-
+a, figure {
+    display: inline-block;
+}
+figcaption {
+    margin: 10px 0 0 0;
+    font-variant: small-caps;
+    font-family: Arial;
+    font-weight: bold;
+    color: #bb3333;
+}
+figure {
+    padding: 5px;
+}
     	ul {
     		list-style-type:none;
     	}
@@ -128,12 +140,12 @@ handleReturnedRecipeSteps = function (data) {
 				$("#selectedRecipe").append("<div style='background-color:"+backgroundColor+"'><b>"+data[l].steps[i].number+"</b><p>"+data[l].steps[i].step+"</p>");
 				if (data[l].steps[i].ingredients.length !== 0) {
 					for (var j = 0; j < data[l].steps[i].ingredients.length; j++) {
-						$("#selectedRecipe").append("<img src="+data[l].steps[i].ingredients[j].image+">");
+						$("#selectedRecipe").append("<figure><img src="+data[l].steps[i].ingredients[j].image+"><figcaption>"+data[l].steps[i].ingredients[j].name+"</figcaption></figure>");
 					}
 				}
 				if (data[l].steps[i].equipment.length !== 0) {
 					for (var k = 0; k < data[l].steps[i].equipment.length; k++) {
-						$("#selectedRecipe").append("<img src="+data[l].steps[i].equipment[k].image+">");
+						$("#selectedRecipe").append("<figure><img src="+data[l].steps[i].equipment[k].image+"><figcaption>"+data[l].steps[i].ingredients[k].name+"</figcaption></figure>");
 					}
 				}
 				$("#selectedRecipe").append("<hr>");

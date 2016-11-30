@@ -274,7 +274,7 @@ function initIngredients(array) {
 	if (!localStorage.getItem('cupboardIngredients')) {
 		localStorage.setItem('cupboardIngredients', JSON.stringify(array));
 		$.each(array, function (index, value) {
-			$("div#ingredients").append("<span id="+index+" onclick='removeIngredient("+index+")' class='singleIngredient'> "+ value + " </span>");
+			$("ul#ingredients").append("<li id="+index+" onclick='removeIngredient("+index+")' class='singleIngredient'> "+ value + " </li>");
 		});
 	} else {
 		$.each(JSON.parse(localStorage.getItem('cupboardIngredients')),function(index, value) {
@@ -324,6 +324,8 @@ function removeIngredient(index) {
 	<div id="ingredients">
 		<h3>(Click ingredients to remove them from the list)</h3>
 		<b>
+			<ul id="ingredients">
+			</ul>
 			<span id="removeThis" ><button onclick="initIngredients(arrayOfStartingIngredients);">CLICK THIS FIRST, PLEASE</button></span>
 		</b>
 	</div>

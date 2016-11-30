@@ -37,6 +37,10 @@ $(function() {
 
                 console.log("Value of "+ state + " changed to " + value);
                 self.setState(state, value);
+                var input = document.querySelector(".controls input[type=file]");
+                if (input.files && input.files.length) {
+                    App.decode(URL.createObjectURL(input.files[0]));
+                }
             });
 
         },

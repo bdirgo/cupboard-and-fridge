@@ -274,12 +274,12 @@ function initIngredients(array) {
 	if (!localStorage.getItem('cupboardIngredients')) {
 		localStorage.setItem('cupboardIngredients', JSON.stringify(array));
 		$.each(array, function (index, value) {
-			$("ul#ingredients").append("<span onclick='removeIngredient("+index+")' class='singleIngredient'> "+ value + " </span>");
+			$("ul#ingredients").append("<span id="+index+" onclick='removeIngredient("+index+")' class='singleIngredient'> "+ value + ", </span>");
 		});
 	} else {
 		$.each(JSON.parse(localStorage.getItem('cupboardIngredients')),function(index, value) {
 			if (value !== null) {
-				$("ul#ingredients").append("<span onclick='removeIngredient("+index+")' class='singleIngredient'> "+ value + " </span>");
+				$("ul#ingredients").append("<span id="+index+" onclick='removeIngredient("+index+")' class='singleIngredient'> "+ value + ", </span>");
 			}
 		});
 	}
@@ -296,7 +296,7 @@ function addIngredient() {
 	var array = JSON.parse(localStorage.getItem('cupboardIngredients'));
 	array.push(inputVal);
 	localStorage.setItem('cupboardIngredients', JSON.stringify(array));
-	$("ul#ingredients").append("<span onclick='removeIngredient("+ (array.length - 1) +")' class='singleIngredient'> "+ inputVal + " </span>");
+	$("ul#ingredients").append("<span id="+index+" onclick='removeIngredient("+ (array.length - 1) +")' class='singleIngredient'> "+ inputVal + ", </span>");
 	$("input#input").val('');
 }
 
@@ -359,7 +359,7 @@ $(document).ready(function(){
 		<div id="output"></div>
 	</div>
 	<div class="add-barcode">
-	<button onclick="visibleRecipies();">Find Recipes</button>
+	<button onclick="visibleRecipies();">Back to Recipes</button>
 		<section id="container" class="container">
 			<div class="controls">
 				<fieldset class="input-group">

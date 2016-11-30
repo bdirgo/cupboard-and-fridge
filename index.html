@@ -9,11 +9,12 @@
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
     <meta charset="utf-8">
-    <title>Cupboard/Fridge Recipe Search</title>
+    <title>Find Recipies Now</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="utf-8">
     <!-- <link rel="stylesheet" type="text/css" href="bootstrap.css"> -->
     <style>
+
     	ul {
     		list-style-type:none;
     	}
@@ -309,6 +310,16 @@ function removeIngredient(index) {
 	$("span#"+index).empty();
 }
 
+function visibleBarcode() {
+	$("div.add-barcode").css('visibility', 'visible');
+	$("div.recipes").css('visibility', 'hidden');
+}
+
+function visibleRecipies() {
+	$("div.add-barcode").css('visibility', 'hidden');
+	$("div.recipes").css('visibility', 'visible');
+}
+
 	$(document).ready(function(){
 		initIngredients(arrayOfStartingIngredients);
 	});
@@ -318,17 +329,26 @@ function removeIngredient(index) {
 </head>
 <body>
 	<!-- <img src="cake.jpg" style="max-height: 180px;"> -->
-
-	<h1>Recipies you can make now</h1>
-	<h2>These are the ingredients that are in your fridge/cupboard:</h2>
-	<div id="ingredients">
-		<h3>(Click ingredients to remove them from the list)</h3>
-		<b>
-			<ul id="ingredients">
-			</ul>
-			<span id="removeThis" ><button onclick="initIngredients(arrayOfStartingIngredients);">CLICK THIS FIRST, PLEASE</button></span>
-		</b>
+	<div class="recipes">
+		<h1>Recipies you can make now</h1>
+		<h2>These are the ingredients that are in your fridge/cupboard:</h2>
+		<div id="ingredients">
+			<h3>(Click ingredients to remove them from the list)</h3>
+			<b>
+				<ul id="ingredients">
+				</ul>
+				<span id="removeThis" ><button onclick="initIngredients(arrayOfStartingIngredients);">CLICK THIS FIRST, PLEASE</button></span>
+			</b>
+		</div>
+		<button onclick="visibleBarcode();">Add ingredients</button>
+		<br>
+		<p>The list of ingredients above will be used to search for recipes.</p>
+		<button onclick="doIt()">Find Recipes</button>
+		<div id="selectedRecipe"></div>
+		<div id="output">The first recipes returned are:</div>
 	</div>
+	<div class="add-barcode">
+	<button onclick="visibleRecipies();">Add ingredients</button>
 	<section id="container" class="container">
 		<div class="controls">
 			<fieldset class="input-group">
@@ -371,11 +391,8 @@ function removeIngredient(index) {
 		<button onclick="addIngredient()" type="submit">Add Ingredient</button>
 		<input id="input" placeholder="Manually enter ingredient" />
 	</div>
-	<br>
-	<p>The list of ingredients above will be used to search for recipes.</p>
-	<button onclick="doIt()">Find Recipes</button>
-	<div id="selectedRecipe"></div>
-	<div id="output">The first recipes returned are:</div>
+	</div>
+
 	<script src="quagga.js" type="text/javascript"></script>
 	<script src="file_input.js" type="text/javascript"></script>
 	<script src="https://serratus.github.io/quaggaJS/javascripts/scale.fix.js"></script>

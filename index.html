@@ -137,7 +137,7 @@ handleReturnedRecipeSteps = function (data) {
 	for (var l =0; l < data.length; l++) {
 		if (data[l].steps.length !== 0) {
 			for (var i = 0; i < data[l].steps.length; i++) {
-				$("#selectedRecipe").append("<div style='background-color:"+backgroundColor+"'><b>"+data[l].steps[i].number+"</b><p>"+data[l].steps[i].step+"</p>");
+				$("#selectedRecipe").append("<div style='background-color:"+backgroundColor+"'><p><b>"+data[l].steps[i].number+". </b>"+data[l].steps[i].step+"</p>");
 				if (data[l].steps[i].ingredients.length !== 0) {
 					for (var j = 0; j < data[l].steps[i].ingredients.length; j++) {
 						$("#selectedRecipe").append("<figure><img src="+data[l].steps[i].ingredients[j].image+"><figcaption>"+data[l].steps[i].ingredients[j].name+"</figcaption></figure>");
@@ -145,7 +145,7 @@ handleReturnedRecipeSteps = function (data) {
 				}
 				if (data[l].steps[i].equipment.length !== 0) {
 					for (var k = 0; k < data[l].steps[i].equipment.length; k++) {
-						$("#selectedRecipe").append("<figure><img src="+data[l].steps[i].equipment[k].image+"><figcaption>"+data[l].steps[i].ingredients[k].name+"</figcaption></figure>");
+						$("#selectedRecipe").append("<figure><img src="+data[l].steps[i].equipment[k].image+"><figcaption>"+data[l].steps[i].equipment[k].name+"</figcaption></figure>");
 					}
 				}
 				$("#selectedRecipe").append("<hr>");

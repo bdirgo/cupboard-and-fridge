@@ -17,6 +17,9 @@
 
     	ul {
     		list-style-type:none;
+    		max-height: 250px; 
+    		height: 250px; 
+    		overflow: auto;
     	}
 
     	canvas {
@@ -245,29 +248,29 @@ function fixedEncodeURIComponent (str) {
 
 function createCookie(name,value,days) {
 	var expires;
-    if (days) {
-        var date = new Date();
-        date.setTime(date.getTime()+(days*24*60*60*1000));
-        expires = "; expires="+date.toUTCString();
-    } else {
-    	expires = "";
-    }
-    document.cookie = name+"="+value+expires+"; path=/";
+	if (days) {
+		var date = new Date();
+		date.setTime(date.getTime()+(days*24*60*60*1000));
+		expires = "; expires="+date.toUTCString();
+	} else {
+		expires = "";
+	}
+	document.cookie = name+"="+value+expires+"; path=/";
 }
 
 function readCookie(name) {
-    var nameEQ = name + "=";
-    var ca = document.cookie.split(';');
-    for(var i=0;i < ca.length;i++) {
-        var c = ca[i];
-        while (c.charAt(0)==' ') c = c.substring(1,c.length);
-        if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length,c.length);
-    }
-    return null;
+	var nameEQ = name + "=";
+	var ca = document.cookie.split(';');
+	for(var i=0;i < ca.length;i++) {
+		var c = ca[i];
+		while (c.charAt(0)==' ') c = c.substring(1,c.length);
+		if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length,c.length);
+	}
+	return null;
 }
 
 function eraseCookie(name) {
-    createCookie(name,"",-1);
+	createCookie(name,"",-1);
 }
 
 function initIngredients(array) {
@@ -320,10 +323,10 @@ function visibleRecipies() {
 	$("div.recipes").css('display', 'inline');
 }
 
-	$(document).ready(function(){
-			$("div.add-barcode").css('display', 'none');
-			initIngredients(arrayOfStartingIngredients);
-	});
+$(document).ready(function(){
+	$("div.add-barcode").css('display', 'none');
+	initIngredients(arrayOfStartingIngredients);
+});
 
 
 </script>
@@ -349,49 +352,49 @@ function visibleRecipies() {
 		<div id="output">The first recipes returned are:</div>
 	</div>
 	<div class="add-barcode">
-	<button onclick="visibleRecipies();">Add ingredients</button>
-	<section id="container" class="container">
-		<div class="controls">
-			<fieldset class="input-group">
-				<p>Scan barcodes by clicking "Choose File:" and "Take Picture".</p> <p>Select a Barcode Type from the dropdown and select "Add Barcode".</p>
-				<input type="file" accept="image/*;capture=camera"/>
-			</fieldset>
-			<fieldset class="reader-config-group">
-				<label>
-					<span>Barcode-Type</span>
-					<select name="decoder_readers">
-						<option selected="selected" >Barcode Type</option>
-						<option value="code_128" >Code 128</option>
-						<option value="code_39">Code 39</option>
-						<option value="code_39_vin">Code 39 VIN</option>
-						<option value="ean" >EAN</option>
-						<option value="ean_extended">EAN-extended</option>
-						<option value="ean_8">EAN-8</option>
-						<option value="upc" >UPC</option>
-						<option value="upc_e">UPC-E</option>
-						<option value="codabar">Codabar</option>
-						<option value="i2of5">ITF</option>
-					</select>
-				</label>
-			</fieldset>
+	<button onclick="visibleRecipies();">Find Recipes</button>
+		<section id="container" class="container">
+			<div class="controls">
+				<fieldset class="input-group">
+					<p>Scan barcodes by clicking "Choose File:" and "Take Picture".</p> <p>Select a Barcode Type from the dropdown and select "Add Barcode".</p>
+					<input type="file" accept="image/*;capture=camera"/>
+				</fieldset>
+				<fieldset class="reader-config-group">
+					<label>
+						<span>Barcode-Type</span>
+						<select name="decoder_readers">
+							<option selected="selected" >Barcode Type</option>
+							<option value="code_128" >Code 128</option>
+							<option value="code_39">Code 39</option>
+							<option value="code_39_vin">Code 39 VIN</option>
+							<option value="ean" >EAN</option>
+							<option value="ean_extended">EAN-extended</option>
+							<option value="ean_8">EAN-8</option>
+							<option value="upc" >UPC</option>
+							<option value="upc_e">UPC-E</option>
+							<option value="codabar">Codabar</option>
+							<option value="i2of5">ITF</option>
+						</select>
+					</label>
+				</fieldset>
+			</div>
+			<div id="result_strip">
+				<ul class="thumbnails"></ul>
+			</div>
+			<!-- <div id="interactive" class="viewport"></div> -->
+		</section>
+		<div>
+			<button onclick="$('h4.code').promise().then(findUPC()).then(addIngredient());" >Add Barcode</button>
 		</div>
-		<div id="result_strip">
-			<ul class="thumbnails"></ul>
+		<div>
+			<button onclick="findUPC()" type="submit">Find product</button>
+			<input id="UPCinput" placeholder="Manually enter UPC" />
+			<div id="UPCreturn">UPC has found:<ul id="UPCreturn"></ul></div>
 		</div>
-		<!-- <div id="interactive" class="viewport"></div> -->
-	</section>
-	<div>
-		<button onclick="$('h4.code').promise().then(findUPC()).then(addIngredient());" >Add Barcode</button>
-	</div>
-	<div>
-		<button onclick="findUPC()" type="submit">Find product</button>
-		<input id="UPCinput" placeholder="Manually enter UPC" />
-		<div id="UPCreturn">UPC has found:<ul id="UPCreturn"></ul></div>
-	</div>
-	<div>
-		<button onclick="addIngredient()" type="submit">Add Ingredient</button>
-		<input id="input" placeholder="Manually enter ingredient" />
-	</div>
+		<div>
+			<button onclick="addIngredient()" type="submit">Add Ingredient</button>
+			<input id="input" placeholder="Manually enter ingredient" />
+		</div>
 	</div>
 
 	<script src="quagga.js" type="text/javascript"></script>

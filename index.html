@@ -338,17 +338,18 @@ function removeIngredient(index) {
 	<section id="container" class="container">
 		<div class="controls">
 			<fieldset class="input-group">
-				<p>Scan barcodes by clicking "Choose File:" and "Take Picture". Select a Barcode from the dropdown and select "Add Barcode".</p>
+				<p>Scan barcodes by clicking "Choose File:" and "Take Picture". Select a Barcode Type from the dropdown and select "Add Barcode".</p>
 				<input type="file" accept="image/*;capture=camera"/>
 			</fieldset>
 			<fieldset class="reader-config-group">
 				<label>
 					<span>Barcode-Type</span>
 					<select name="decoder_readers">
+						<option selected="selected" >Barcode Type</option>
 						<option value="code_128" >Code 128</option>
 						<option value="code_39">Code 39</option>
 						<option value="code_39_vin">Code 39 VIN</option>
-						<option value="ean" selected="selected">EAN</option>
+						<option value="ean" >EAN</option>
 						<option value="ean_extended">EAN-extended</option>
 						<option value="ean_8">EAN-8</option>
 						<option value="upc" >UPC</option>

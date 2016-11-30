@@ -351,13 +351,15 @@ function removeIngredient(index) {
 					</select>
 				</label>
 			</fieldset>
-			<div><button onclick="findUPC();" >Add Barcode</button></div>
 		</div>
 		<div id="result_strip">
 			<ul class="thumbnails"></ul>
 		</div>
 		<!-- <div id="interactive" class="viewport"></div> -->
 	</section>
+	<div>
+		<button onclick="document.querySelector('h4.code').ready().then(findUPC()).then(addIngredient());" >Add Barcode</button>
+	</div>
 	<div>
 		<button onclick="findUPC()" type="submit">Find product</button>
 		<input id="UPCinput" placeholder="Manually enter UPC" />
